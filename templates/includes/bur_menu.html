@@ -1,0 +1,29 @@
+{% load static %}
+<!-- Затемняющий слой -->
+<div class="overlay" id="overlay"></div>
+<!-- Меню -->
+<div class="menu click" id="menu">
+    <div class="title" style="color: aliceblue"><h1>Меню</h1></div>
+    <div class="list_menu">
+        {% if request.user.employer%}
+        <li>
+            <a href="{% url 'createVacancy' %}" class="menu_gradient header__link">Создать Вакансию</a>
+        </li>
+        {% else %}
+        <li>
+            <a href="{% url 'createResume' %}" class="menu_gradient header__link">Создать Резюме</a>
+        </li>
+        <li>
+            <a href="{% url 'createService' %}" class="menu_gradient header__link">Разместить Услугу</a>
+        </li>
+        {% endif%}
+        <li><a href="{% url 'index' %}" class="header__link">Найти сотрудников</a></li>
+        <li><a href="{% url 'services' %}" class="header__link">Подобрать услугу</a></li>
+        <li><a href="{% url 'vacancies' %}" class="header__link">Найти работу</a></li>
+        <li><a href="{% url 'info:contacts' %}" class="header__link">Контакты</a></li>
+    </div>
+    <div class="footer_menu">
+        <p>© Права защищены 2024</p>
+    </div>
+</div>
+<script src="{% static 'js/bur_menu.js' %}"></script>

@@ -1,0 +1,84 @@
+{% extends 'logo_menu.html'%}
+{% load static %}
+{% block content %}
+<!-- Блок Новая услуга -->
+<form class="center-container" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div style="padding: 55px"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="filters">
+                    <h2 class="mb-3 fs-3">Основная информация</h2>
+                    {{form_sf.non_field_errors }}
+                    {% for field in form_sf %}
+                    <label class="form-label">{{ field.label }}</label>
+                    <div class="mb-3">
+                        {{ field }}
+                        {{ field.errors }}
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Конец блока Новая услуга -->
+
+    <!-- Блок Дополнительно -->
+    <div style="padding: 20px"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="filters">
+                    <h2 class="mb-3 fs-3">Дополнительно</h2>
+                    {{form_af.non_field_errors}}
+                    {% for field in form_af %}
+                    <label class="form-label">{{ field.label }}</label>
+                    <div class="mb-3">
+                        {{ field }}
+                        {{ field.errors }}
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Конец блока Дополнительно -->
+    <!-- Блок Фотографии работ -->
+    <div style="padding: 20px"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="filters">
+                    <h2 class="mb-3 fs-3">Фотографии работ</h2>
+                    <!-- Фотографии работ -->
+                    <div class="col-mb-12">
+                        <label class="form-label">Ваши работы:</label>
+                        <div class="image-preview">
+                            {% for photo in photos %}
+                            <div class="existing-photo-item mb-2" style="display: inline-block; margin-right: 10px;">
+                                <img src="{{ photo.image.url }}" alt="Фото"
+                                     class="preview-image" >
+                                <p>
+                                    <a href="{% url 'delete_service_photo' photo.pk %}"
+                                       class="btn btn-danger btn-sm">Удалить</a>
+                                </p>
+                            </div>
+                            {% empty %}
+                             <label class="form-label">Фото работ отсутствует</label>
+                            {% endfor %}
+                        </div>
+                        <input type="file" name="images" id="image-input" class="form-control" multiple>
+                    </div>
+                    <div id="image-preview"></div>
+                    {% include 'includes/btns_submit_reset.html'%}
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<!-- Конец блока Фотографии работ -->
+<script src="{% static 'js/images.js' %}"></script>
+
+{% endblock %}

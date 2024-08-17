@@ -1,0 +1,27 @@
+{% extends 'logo_menu.html'%}
+{% load static %}
+{% block content %}
+<form class="center-container" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div style="padding: 55px"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="filters">
+                    <h1 class="mb-3 fs-3">Служба поддержки</h1>
+                    {{form.non_field_errors }}
+                    {% for field in form %}
+                    <label class="form-label">{{ field.label }}</label>
+                    <div class="mb-3">
+                        {{ field }}
+                        {{ field.errors }}
+                    </div>
+                    {% endfor %}
+                    <button class="btn btn-success" type="submit">Отправить</button>
+                    <button type="reset" class="btn btn-danger" onclick="goBack()">Назад </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock %}

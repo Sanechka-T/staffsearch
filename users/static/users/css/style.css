@@ -1,0 +1,326 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+.body_login {
+  height: 100vh;
+  min-width: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.click_in {
+  transition: all 0.3s ease;
+  right: -600px;
+}
+
+.header__login {
+  margin-left: 0px;
+  display: block;
+  width: 25px;
+  height: 50px;
+  background-repeat: no-repeat;
+}
+
+.header__nav {
+  margin-right: 50px;
+  margin-left: 50px;
+  font-size: 20px;
+  align-items: center;
+}
+
+.wrapper {
+  width: 420px;
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, .2);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+  color: #fff;
+  border-radius: 10px;
+  padding: 30px 40px;
+}
+
+.wrapper h1 {
+  font-size: 36px;
+  text-align: center;
+}
+
+.wrapper .input-box {
+  position: relative;
+  width: 100%;
+  height: 50px;
+  margin: 30px 0;
+}
+
+.input-box input{
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  border: 2px solid rgba(255, 255, 255, .2);
+  border-radius: 40px;
+  font-size: 16px;
+  color: #fff;
+  padding: 20px 45px 20px 20px;
+}
+
+.input-box input::placeholder {
+  color: #fff;
+}
+
+.input-box i {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+}
+
+.wrapper .remember-forgot {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14.5px;
+  margin: -15px 0 15px;;
+}
+
+.remember-forgot label input {
+  accent-color: #fff;
+  margin-right: 3px;  
+}
+
+.remember-forgot a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.remember-forgot a:hover {
+  text-decoration: underline;
+}
+
+.wrapper .btn {
+  width: 100%;
+  height: 45px;
+  background: #fff;
+  border: none;
+  outline: 2px solid rgb(255, 255, 255);
+  border-radius: 40px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+  cursor: pointer;
+  font-size: 16px;
+  color: #333;
+  font-weight: 600;
+}
+
+.wrapper .register-link {
+  font-size: 14.5px;
+  text-align: center;
+  margin-top: 20px;
+  margin: 20px 0 15px;
+}
+
+.register-link p a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.register-link p a:hover {
+  text-decoration: underline;
+}
+
+.extraInput {
+  display: none;
+}
+
+.error-message {
+ font-size: 0.9em;
+ padding: 0; /* Отступ для отображения справа */
+}
+/* стили для слайдов услуг */
+.slide-container {
+  max-width: 1120px;
+  width: 100%;
+  background-color: transparent;
+  padding: 20px 0;
+}
+
+.slide-content {
+  background-color: transparent;
+  overflow: hidden;
+  border-radius: 25px;
+}
+
+.card-wrapper {
+  display: flex;
+  flex-wrap: wrap; /* переносит на новую строку */
+  gap: 20px; /* Пробел между карточками */
+}
+
+.card {
+  flex: 1 1 calc(33.33% - 20px); /* Позволяет карточкам занимать 1/3 ширины контейнера, вычтя пробел */
+  max-width: calc(33.33% - 20px); /* Ограничивает максимальную ширину карточки */
+  margin-bottom: 20px !important;
+  border-radius: 25px !important;
+  background-color: #fff !important;
+}
+
+.image-content, .card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 14px;
+}
+
+.card-content{
+  height: 100%;
+}
+
+.image-content {
+  display: flex;
+  position: relative;
+  row-gap: 5px;
+  padding: 25px 0;
+
+  justify-content: space-between;
+}
+
+.overlay-slide {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(251, 180, 124, 1);
+  border-radius: 25px 25px 0 25px;
+}
+.overlay-slide::before, .overlay-slide::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: -40px;
+  height: 40px;
+  width: 40px;
+  background-color: rgba(251, 180, 124, 1);
+}
+.overlay-slide::after{
+  border-radius: 0 25px 0 0;
+  background-color: #fff;
+}
+
+.card-image {
+  position: relative;
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  background: #fff;
+  padding: 3px;
+}
+
+.card-image .card-img {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid rgba(251, 180, 124, 1);
+}
+
+.name {
+  font-size: 18px;
+  font-weight: 500;
+  color: #333;
+}
+
+.description {
+  font-size: 14px;
+  color: #707070;
+  text-align: left;
+  flex-grow: 1;
+  display: inline-block; /* Позволяет выравнять текст с фиксированной шириной */
+    width: 240px;
+}
+
+.button {
+  border: none;
+  font-size: 16px;
+  color: #fff;
+  padding: 8px 16px;
+  background-color: rgba(241, 123, 27, 1);
+  border-radius: 4px;
+  margin: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: auto;
+}
+.button:hover {
+  background: rgba(234, 4, 4, 0.899);
+}
+/* конец стили для слайдов услуг */
+/* меню точек для карточек */
+.navigation {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  width: 30px;
+  height: 50px;
+  background: #ffffff;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: 0.5s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navigation.active {
+  height: 100px;
+  width: 40px;
+}
+
+.navigation span {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: rgba(251, 180, 124, 1);
+  border-radius: 50%;
+  transition: 0.5s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navigation span:nth-child(1) {
+  transform: translateY(-12px);
+}
+
+.navigation span:nth-child(3) {
+  transform: translateY(12px);
+}
+
+.navigation.active span {
+  width: 25px;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.5s;
+}
+
+.navigation.active span:nth-child(1) {
+  transform: translateY(-30px) translateX(0);
+}
+
+.navigation.active span:nth-child(3) {
+  transform: translateY(30px) translateX(0);
+}
+
+.navigation span i {
+  transition: 0.5s;
+  font-size: 0em;
+  color: #fff;
+}
+
+.navigation.active span i {
+  font-size: 1.25em;
+}
+/*end*/

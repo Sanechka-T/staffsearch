@@ -1,0 +1,46 @@
+{% extends 'logo_menu.html'%}
+{% load static %}
+{% block content %}
+<div style="padding: 40px"></div>
+<div class="container">
+    <div class="show-container">
+        <h1>{{ vacancy.title }}</h1>
+        <p><strong>Компания:</strong> {{ vacancy.company.company_name }}</p>
+        <p>{{ vacancy.company.company_description }}</p>
+        <p><strong>Профессия:</strong> {{ vacancy.profession }}</p>
+        <p><strong>Сфера деятельности:</strong> {{ vacancy.field_of_activity }}</p>
+
+        {% if vacancy.photo %}<img src="{{ vacancy.photo.url }}" alt="Логотип компании" class="vacancy-photo">{% endif %}
+
+        <div style=" clear: both;"></div>
+
+        <p><strong>Описание вакансии:</strong></p>
+        <p>{{ vacancy.description }}</p>
+        <p><strong>Дата создания:</strong> {{ vacancy.date_uploaded }}</p>
+    </div>
+
+    <div class="show-container">
+        <h2 class="section-title">Условия работы</h2>
+        {% if vacancy.conditions %}
+            <p><strong>Тип занятости:</strong> {{ vacancy.conditions.get_employment_display }}</p>
+            <p><strong>Способ оформления:</strong> {{ vacancy.conditions.get_contract_display }}</p>
+            <p><strong>Зарплата:</strong> {{ vacancy.conditions.salary }}</p>
+            <p><strong>Удалённая работа:</strong> {{ vacancy.conditions.remote_work|yesno:"Да,Нет" }}</p>
+            <p><strong>Частота выплат:</strong> {{ vacancy.conditions.get_frequency_payments_display }}</p>
+            <p><strong>Что получают работники:</strong> {{ vacancy.conditions.what_employees_get|default:"Информация отсутствует" }}</p>
+        {% else %}
+            <p>Условия работы отсутствуют.</p>
+        {% endif %}
+    </div>
+    <div class="show-container">
+        <h2 class="section-title">Контакты</h2>
+            <p><strong>Телефон:</strong> {{ vacancy.company.company_phone }} Звонить в рабочее время с 09:00 до 18:00 по будням.</p>
+            <p><strong>Email компании:</strong> {{ vacancy.company.company_email }}</p>
+            <p><strong>Адрес:</strong> {{ vacancy.company.company_address }}</p>
+            {% if vacancy.company.company_site %}
+            <p><strong>Сайт:</strong> {{ vacancy.company.company_site }}</p>
+            {% endif %}
+    </div>
+</div>
+
+{% endblock %}

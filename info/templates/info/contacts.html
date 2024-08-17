@@ -1,0 +1,27 @@
+{% extends 'logo_menu.html'%}
+{% load static %}
+{% block head %}
+    <link type="text/css" rel="stylesheet" href="{% static 'info/css/style.css' %}"/>
+{% endblock %}
+
+{% block content %}
+<div class="ffbox">
+    <div class="ffbox1">
+        <h1 class="gfg">{{ title }}</h1>
+        <h4>Адрес</h4>
+        <p>{{contacts_address}}</p>
+        <h4>Контактный телефон</h4>
+        <p>{{contacts_phone}}</p>
+        <h4>Почта</h4>
+        <p>{{contacts_email}}</p>
+        <h4>Режим работы</h4>
+        <p>{{contacts_worktime}}</p>
+
+
+    </div>
+    <div class="map-div">
+        <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A76d33a9fdac90a6e2ace73fc9e91298a88ec1063e8565e7a20c0a84b6a4a72e2&amp;source=constructor"
+                width="1100" height="800" frameborder="0"></iframe>
+    </div>
+</div>
+{% endblock %}

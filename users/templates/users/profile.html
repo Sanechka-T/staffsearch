@@ -1,0 +1,172 @@
+{% extends 'logo_menu.html' %}
+{% load static%}
+{% block head %}
+<link type="text/css" rel="stylesheet" href="{% static 'users/css/style.css' %}"/>
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+{% endblock %}
+
+
+{% block content %}
+<div style="padding: 55px"></div>
+<div class="container">
+    <div class="row">
+
+        <div class="col-9">
+            {% if user.employer %}
+            <!-- Блок Вакансии -->
+            <div class="girl">
+                <h2 class="mb-3 fs-3">Ваши вакансии</h2>
+                <div class="slide-container">
+                    <div class="slide-content">
+                        <div class="card-wrapper">
+
+                            {% for vacancy in user.employer.vacancies.all %}
+                            <div class="card">
+                                <div class="image-content">
+                                    <span class="overlay-slide"></span>
+
+                                    <div class="card-image">
+                                        {% if vacancy.photo %}
+                                        <img src="{{ vacancy.photo.url }}" alt="Фото" class="card-img">
+                                        {% else %}
+                                        <img src="{{ default_image }}" alt="Фото" class="card-img">
+                                        {% endif %}
+                                    </div>
+                                    <div class="navigation">
+                                        <span><a href="{% url 'updateVacancy' vacancy.pk %}"><i
+                                                class='bx bxs-edit-alt'></i></a></span>
+                                        <span><a href="{% url 'delete_vacancy' vacancy.pk %}"><i class='bx bx-trash'></i></a></span>
+                                        <span><i class='bx bx-x'></i></span>
+                                    </div>
+                                </div>
+
+                                <div class="card-content">
+                                    <h2 class="name">{{ vacancy.title }}</h2>
+                                    <p class="description"><strong>Компания:</strong> {{ vacancy.company.company_name }} <br> <strong>Профессия:</strong> {{ vacancy.profession }} <br> <strong>Зарплата:</strong> {{ vacancy.conditions.salary }}</p>
+                                    <a href="{% url 'showVacancy' vacancy.pk %}"><button class="button">Посмотреть</button></a>
+                                </div>
+                            </div>
+                            {% empty %}
+                            <p class="description">Вакансии отсутствуют</p>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- Конец Блока Вакансии -->
+            {% else %}
+            <!-- Блок Резюме -->
+            <div class="girl">
+                <h2 class="mb-3 fs-3">Ваши резюме</h2>
+                <div class="slide-container">
+                    <div class="slide-content">
+                        <div class="card-wrapper">
+
+                            {% for resume in user.resumes.all %}
+                            <div class="card">
+                                <div class="image-content">
+                                    <span class="overlay-slide"></span>
+
+                                    <div class="card-image">
+                                        {% if resume.photo %}
+                                        <img src="{{ resume.photo.url }}" alt="Фото" class="card-img">
+                                        {% else %}
+                                        <img src="{{ default_user_image }}" alt="Фото" class="card-img">
+                                        {% endif %}
+                                    </div>
+                                    <div class="navigation">
+                                        <span><a href="{% url 'updateResume' resume.pk %}"><i
+                                                class='bx bxs-edit-alt'></i></a></span>
+                                        <span><a href="{% url 'delete_resume' resume.pk %}"><i class='bx bx-trash'></i></a></span>
+                                        <span><i class='bx bx-x'></i></span>
+                                    </div>
+                                </div>
+
+                                <div class="card-content">
+                                    <h2 class="name">{{ resume.post }}</h2>
+                                    <p class="description"><strong>Зарплата:</strong> {{ resume.salary }} <br> <strong>Возраст:</strong>
+                                        {{ resume.get_true_age }} <br> <strong>Навыки:</strong> {{resume.professional_skills.skills|default:"Отсутствуют" }} </p>
+
+                                    <a href="{% url 'showResume' resume.pk %}"><button class="button">Посмотреть</button></a>
+                                </div>
+                            </div>
+                            {% empty %}
+                            <p class="description">Резюме отсутствуют</p>
+                            {% endfor %}
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- Конец Блока Резюме -->
+
+            <!-- Блок Услуги -->
+            <div class="r10"></div>
+            <div class="girl">
+                <h2 class="mb-3 fs-3">Ваши услуги</h2>
+                <div class="slide-container">
+                    <div class="slide-content">
+                        <div class="card-wrapper">
+
+                            {% for service in user.services.all %}
+                            <div class="card">
+                                <div class="image-content">
+                                    <span class="overlay-slide"></span>
+
+                                    <div class="card-image">
+                                        {% if service.photos.first %}
+                                        <img src="{{ service.photos.first.image.url }}" alt="Фото" class="card-img">
+                                        {% else %}
+                                        <img src="{{ default_image }}" alt="Фото" class="card-img">
+                                        {% endif %}
+                                    </div>
+                                    <div class="navigation">
+                                        <span><a href="{% url 'updateService' service.pk %}"><i
+                                                class='bx bxs-edit-alt'></i></a></span>
+                                        <span><a href="{% url 'delete_service' service.pk %}"><i class='bx bx-trash'></i></a></span>
+                                        <span><i class='bx bx-x'></i></span>
+                                    </div>
+                                </div>
+
+                                <div class="card-content">
+                                    <h2 class="name">{{ service.name }}</h2>
+                                    <p class="description"><strong>Стоимость:</strong> {{ service.cost }} <br> <strong>Прайс-лист:</strong> {{ service.price_list|default:"Отсутствует" }} <br></p>
+                                    <a href="{% url 'showService' service.pk %}"><button class="button">Посмотреть</button></a>
+                                </div>
+                            </div>
+                            {% empty %}
+                            <p class="description">Услуги отсутствуют</p>
+                            {% endfor %}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            <!-- Конец Блока Услуги -->
+        </div>
+
+        <!-- Блок Профиль -->
+        <div class="col-3">
+            <div class=" filters">
+                <h2 class="mb-3 fs-3">Профиль</h2>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="form-error">{{ form.non_field_errors }}</div>
+                    {% for f in form %}
+                    <p><label class="form-label" for="{{ f.id_for_label }}">{{f.label}}:</label>{{ f }}</p>
+                    <div class="form-error">{{ f.errors }}</div>
+                    {% endfor %}
+                    <button type="submit" class="button">Сохранить</button>
+                </form>
+            </div>
+        </div>
+        <!-- Конец Блока Профиль -->
+    </div>
+</div>
+<script src="{% static 'users/js/nav.js' %}"></script>
+
+
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'logo_menu.html'%}
+{% load static %}
+{% block content %}
+<div style="padding: 55px"></div>
+<div class="show-container">
+    {% if obj.image %}
+    <h2>Вы уверены, что хотите удалить данное изображение?</h2>
+    <img src="{{ obj.image.url }}" alt="Фото" class="img-thumbnail">
+    {% else %}
+    <h2>Вы уверены, что хотите удалить "{{ obj }}"?</h2>
+    {% endif %}
+    <form method="POST">
+        {% csrf_token %}
+        <button class="btn btn-success" type="submit">Подтвердить</button>
+        <button type="reset" class="btn btn-danger" onclick="goBack()">Отмена</button>
+    </form>
+</div>
+<script src="{% static 'js/go_back.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,168 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block filters %}
+<!-- Блок Фильтры -->
+        <div class="col-3">
+            <div class="filters">
+                <h2 class="mb-3 fs-3">Фильтры</h2>
+                <form action="{% url 'filteringResumes' %}" name="customer-form">
+
+                    <!-- Зарплата -->
+                    <div class="mb-3">
+                        <label class="form-label">Зарплата</label>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">от</span>
+                            <input type="number" name="salary_min" value="{{salary_min}}" class="form-control"
+                                   placeholder="0">
+                            <span class="input-group-text">₽</span>
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">до</span>
+                            <input type="number" name="salary_max" value="{{salary_max}}" class="form-control"
+                                   placeholder="100000">
+                            <span class="input-group-text">₽</span>
+                        </div>
+                    </div>
+
+                    <!-- Возраст -->
+                    <div class="mb-3">
+                        <label class="form-label">Возраст</label>
+                        <div class="mb-3">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text">от</span>
+                                <input type="text" name="age_min" value="{{age_min}}" class="form-control"
+                                       placeholder="18">
+                                <span class="input-group-text">до</span>
+                                <input type="text" name="age_max" value="{{age_max}}" class="form-control"
+                                       placeholder="65">
+                                <span class="input-group-text">лет</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Опыт работы -->
+                    <div class="mb-3">
+                        <label class="form-label">Опыт работы</label>
+                        <select
+                                name="work_experience"
+                                id="work_experience"
+                                class="form-select"
+                        >
+                            <option value=""></option>
+                            {% for exp in Experience %}
+                            <option value="{{exp.0}}" {% if work_experience == exp.0 %}selected{% endif %}>{{exp.1}}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <!-- Тип занятости -->
+                    <div class="mb-3">
+                        <label class="form-label">Тип занятости</label>
+                        <select
+                                name="employment_type"
+                                id="employment_type"
+                                class="form-select"
+                        >
+                            <option value=""></option>
+                            {% for emp in Employment %}
+                            <option value="{{emp.0}}" {% if employment_type == emp.0 %}selected{% endif %}>{{emp.1}}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <!-- Образование -->
+                    <div class="mb-3">
+                        <label class="form-label">Образование</label>
+                        <select
+                                name="education_type"
+                                id="education"
+                                class="form-select"
+                        >
+                            <option value=""></option>
+                            {% for educ in Education %}
+                            <option value="{{educ.0}}" {% if education_type == educ.0 %}selected{% endif %}>{{educ.1}}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="r10"></div>
+                    <button type="submit" class="btn btn-custom">Применить</button>
+                    <a href="{% url 'index' %}" type="btn" class="btn btn-danger">Сбросить</a>
+                </form>
+            </div>
+        </div>
+        <!-- Конец блока фильтры -->
+        {% endblock %}
+
+        {% block Sort %}
+        <!-- Сортировка -->
+        <div class="col-8">
+            <form action="{% url 'sortResumes' %}" method="get">
+                <div class="input-group">
+
+                    <select
+                            class="form-select"
+                            id="inputGroupSelect04"
+                            aria-label="Выберите сортировку..."
+                            name="sort_field"
+                    >
+                        <option value="" {% if type_sort == '' %}selected{% endif %}>Сортировать по...</option>
+                        <option value="sort_date" {% if type_sort == 'sort_date' %}selected{% endif %}>По дате</option>
+                        <option value="sort_age" {% if type_sort == 'sort_age' %}selected{% endif %}>По возрасту</option>
+                    </select>
+                    <button class="btn btn-outline-secondary" type="submit">
+                        Сортировать
+                    </button>
+                </div>
+            </form>
+            {% endblock%}
+
+            {% block content %}
+            {% for resume in resumes %}
+            <div class="r15"></div>
+          <div class="girl">
+            <div class="container">
+              <div class="row">
+                <div class="col-4">
+                  <div class="image-content__main">
+                    <div class="card-image__main">
+                        {% if resume.photo %}
+                      <img src="{{ resume.photo.url }}" alt="" class="card-img__main">
+                        {% else %}
+                      <img src="{{ default_user_image }}" alt="" class="card-img__main">
+                        {% endif %}
+                    </div>
+                  </div>
+                </div>
+                <div class="col-7">
+                  <span class="text_upd">Обновлено {{resume.date_update }} </span><br>
+                <a href="{% url 'showResume' resume.pk %}" class="text_name"><b>{{ resume.post }}</b></a><br>
+                <span class="some_text"><b>{{ resume.salary }}</b></span>
+                <div class="some_text">
+                    <b>{{ resume.about.biography|truncatechars:350 }}</b>
+                    {% if resume.professional_skills.skills != '' %} <br>{{ resume.professional_skills.skills|truncatechars:100}}{% endif %}
+
+                    <p>Опыт работы {% for work in resume.work_experience.all %}{{ work.get_experience_display }} {% empty %} Нет данных об опыте работы {% endfor %}.
+
+                        Образование {% for education in resume.education.all %} {{ education.get_degree_display }} {% empty %} Нет данных об образовании {% endfor %}.<br>
+                        {{ resume.get_true_age }} {{ resume.city }}
+                        {% if resume.removal %}
+                        готов(а) к переезду
+                        {% else %}
+                        не готов(а) к переезду
+                        {% endif %}
+                    </p>
+                </div>
+                    <a href="{% url 'showResume' resume.pk %}" type="button" class="btn btn-custom">Получить контакты</a>
+                </div>
+                </div>
+              </div>
+            </div>
+                {% empty %}
+                <div class="r5"></div>
+                <p class="text_name"> Резюме по заданным критериям не найдено</p>
+                {% endfor %}
+            </div>
+            {% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'logo_menu.html'%}
+{% load static %}
+{% block head %}
+<link type="text/css" rel="stylesheet" href="{% static 'services/css/style.css' %}"/>
+{% endblock %}
+{% block content %}
+<!-- Блок Новая услуга -->
+<form class="center-container" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div style="padding: 55px"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="filters">
+                    <h2 class="mb-3 fs-3">Оставить отзыв на услугу: {{ service.name }} {{ service.cost }}</h2>
+                    {{form.non_field_errors }}
+                    <div>
+                        <label>Оценка:</label>
+                        {% for choice in form.estimation.field.choices %}
+                        <input type="radio" id="star_{{ choice.0 }}" name="estimation" value="{{ choice.0 }}" hidden>
+                        <label class="star" for="star_{{ choice.0 }}">★</label>
+                        {% endfor %}
+                    </div>
+                    <label class="form-label">{{ form.feedback_text.label }}</label>
+                    <div class="mb-3">
+                        {{ form.feedback_text }}
+                        {{ form.feedback_text.errors }}
+                    </div>
+                    <button class="btn btn-success" type="submit">Отправить отзыв</button>
+                    <button type="reset" class="btn btn-danger" onclick="goBack()">Назад к услуге</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<script src="{% static 'services/js/feedback_stars.js' %}"></script>
+<script src="{% static 'js/go_back.js' %}"></script>
+{% endblock %}

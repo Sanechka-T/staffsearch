@@ -1,0 +1,17 @@
+<!-- Переключатель -->
+ <div class="container">
+  <div class="row">
+    <div class="col-11 btn-rad">
+      <input type="radio" class="btn-check" name="options" id="option1" autocomplete="off" {% if type_radio == 'resumes' %} checked {% endif %} onchange="location.href='{% url 'resumes' %}'">
+      <label class="btn btn-three" for="option1">Резюме</label>
+
+      <input type="radio" class="btn-check" name="options" id="option2" autocomplete="off" {% if type_radio == 'services' %} checked {% endif %} onchange="location.href='{% url 'services' %}'">
+      <label class="btn btn-three" for="option2">Услуги</label>
+
+      <input type="radio" class="btn-check" name="options" id="option3" autocomplete="off" {% if type_radio == 'vacancies' %} checked {% endif %} onchange="location.href='{% url 'vacancies' %}'">
+      <label class="btn btn-three" for="option3">Вакансии</label>
+
+    </div>
+  </div>
+</div>
+<!-- Конец Переключатель -->

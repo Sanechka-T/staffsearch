@@ -1,0 +1,57 @@
+{% extends 'logo_menu.html'%}
+{% load static %}
+{% block content %}
+<div style="padding: 40px"></div>
+<div class="container">
+    <div class="show-container">
+        <h1>{{ service.name }}</h1>
+        <p><strong>Описание услуги:</strong> {{ service.description }}</p>
+        <p><strong>Опыт работы:</strong> {{ service.get_experience_display }}</p>
+        <p><strong>Состав группы:</strong> {{ service.get_group_display }}</p>
+        <p><strong>Стоимость:</strong> {{ service.cost }}</p>
+        <p><strong>Прайс-лист:</strong> {{ service.price_list|default:"Отсутствует" }}</p>
+        <p><strong>Телефон:</strong> {{ service.phone }}</p>
+        <p><strong>Электронная почта:</strong> {{ service.email|default:"Не указана" }}</p>
+        <p><strong>Дата создания:</strong> {{ service.date_uploaded }}</p>
+        <p><strong>Дата обновления:</strong> {{ service.date_update }}</p>
+    </div>
+
+    <div class="show-container">
+        <h2 class="section-title">Фотографии услуги</h2>
+        {% for photo in service.photos.all %}
+        <a href="{{ photo.image.url }}"><img src="{{ photo.image.url }}" alt="Фото услуги" class="service-photo"></a>
+        {% empty %}
+            <p>Нет доступных фотографий.</p>
+        {% endfor %}
+    </div>
+
+    <div class="show-container">
+        <h2 class="section-title">Отзывы</h2>
+        {% for feedback in service.feedback.all %}
+            <div>
+                <p><strong>Оценка:</strong> {{ feedback.get_estimation_display }}</p>
+                <p><strong>Отзыв:</strong> {{ feedback.feedback_text }}</p>
+                <hr>
+            </div>
+        {% empty %}
+            <p>Нет отзывов.</p>
+        {% endfor %}
+        <a href="{% url 'create_feedback' service.pk %}" type="button" class="btn btn-custom" >Оставить отзыв</a>
+    </div>
+
+    <div class="show-container">
+        <h2 class="section-title">Дополнительные условия</h2>
+        {% if service.additionally %}
+            <p><strong>Контракт:</strong> {{ service.additionally.get_contract_display }}</p>
+            <p><strong>Гарантия:</strong> {{ service.additionally.get_warranty_display }}</p>
+            <p><strong>Минимальная сумма заказа:</strong> {{ service.additionally.minimum_order }}</p>
+            <p><strong>Закупка материалов:</strong> {{ service.additionally.get_purchase_display }}</p>
+            <p><strong>Автомобиль:</strong> {{ service.additionally.get_car_display }}</p>
+            <p><strong>Инструменты:</strong> {{ service.additionally.get_tools_display }}</p>
+        {% else %}
+            <p>Дополнительные условия отсутствуют.</p>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

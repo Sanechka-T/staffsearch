@@ -1,0 +1,62 @@
+{% extends 'logo_menu.html'%}
+{% load static %}
+{% block content %}
+<!-- Блок Новая вакансия -->
+<form class="center-container" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div style="padding: 55px"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="filters">
+                    <h2 class="mb-3 fs-3">Описание вакансии</h2>
+                    {{form_vf.non_field_errors }}
+                    {% for field in form_vf %}
+                    <label class="form-label">{{ field.label }}</label>
+                    <div class="mb-3">
+                        {{ field }}
+                        {{ field.errors }}
+                    </div>
+                    {% endfor %}
+                    {% if photo %}
+                    <div class="image-preview">
+                            <div class="existing-photo-item mb-2" style="display: inline-block; margin-right: 10px;">
+                                <img src="{{ photo.image.url }}" alt="Фото"
+                                     class="preview-image" >
+                                <p>
+                                    <a href="#"
+                                       class="btn btn-danger btn-sm">Удалить</a>
+                                </p>
+                            </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Конец блока Новая вакансия -->
+
+    <!-- Блок Условия для кандидата -->
+    <div style="padding: 20px"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="filters">
+                    <h2 class="mb-3 fs-3">Условия для кандидата</h2>
+                    {{form_cf.non_field_errors}}
+                    {% for field in form_cf %}
+                    <label class="form-label">{{ field.label }}</label>
+                    <div class="mb-3">
+                        {{ field }}
+                        {{ field.errors }}
+                    </div>
+                    {% endfor %}
+                    {% include 'includes/btns_submit_reset.html'%}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Конец блока Условия для кандидата -->
+
+</form>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'base_users.html' %}
+{% block content %}
+<div class="body_login">
+    <div class="wrapper">
+        <form action="" method="post">
+            {% csrf_token %}
+            <h1>Регистрация для работодателя</h1>
+            {{form_ref.non_field_errors}}
+            {% for field in form_ref %}
+            <div class="input-box">
+                {{ field }}
+            </div>
+            <span class="error-message">{{ field.errors }}</span>
+            {% endfor %}
+
+            <button type="submit" class="btn" name="register">Зарегистрироваться как работодатель</button>
+            <div class="register-link">
+                <p>Есть аккаунт?<a href="{% url 'users:login' %}"> Войти</a></p>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

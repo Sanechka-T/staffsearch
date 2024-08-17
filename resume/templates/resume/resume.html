@@ -1,0 +1,83 @@
+{% extends 'logo_menu.html'%}
+{% load static %}
+{% block content %}
+<div style="padding: 40px"></div>
+<div class="container">
+    <div class="show-container">
+        <h1>{{ resume.name }} {{ resume.lastname }}</h1>
+        {% if resume.photo %}
+        <img src="{{ resume.photo.url }}" alt="Фото" class="profile-photo">
+        {% else %}
+        <img src="{{ default_image }}" alt="Фото" class="profile-photo">
+        {% endif %}
+        <p><strong>Дата рождения:</strong> {{ resume.date_birth }}</p>
+        <p><strong>Возраст:</strong> {{ resume.get_true_age }}</p>
+        <p><strong>Город:</strong> {{ resume.city }}</p>
+        <p><strong>Телефон:</strong> {{ resume.phone }}</p>
+        <p><strong>Электронная почта:</strong> {{ resume.email }}</p>
+        <p><strong>Должность:</strong> {{ resume.post }}</p>
+        <p><strong>Зарплата:</strong> {{ resume.salary }}</p>
+        <p><strong>Тип занятости:</strong> {{ resume.get_employment_display }}</p>
+        <p><strong>Готовность к переезду:</strong> {{ resume.removal|yesno:"Да,Нет" }}</p>
+        <p><strong>Удалённая работа:</strong> {{ resume.remote_work|yesno:"Да,Нет" }}</p>
+    </div>
+
+    <div class="show-container">
+        <h2 class="section-title">Опыт работы</h2>
+        {% for experience in resume.work_experience.all %}
+            <div>
+                {% if experience.position %}<h5>{{ experience.position }} в {{ experience.company_name }}</h5>{% endif %}
+                {% if experience.start_date %}<p><strong>Период:</strong> {{ experience.start_date }} - {% if experience.right_now %} по настоящее время {% else %} {{ experience.end_date }} {% endif %}</p>{% endif %}
+                <p><strong>Стаж:</strong> {{ experience.get_experience_display }}</p>
+
+                {% if experience.description %}<p><strong>Обязанности:</strong> {{ experience.description }}</p> {% endif %}
+                {% if experience.achievements %}<p><strong>Достижения:</strong> {{ experience.achievements }}</p> {% endif %}
+                <hr>
+            </div>
+        {% empty %}
+            <p>Нет информации об опыте работы.</p>
+        {% endfor %}
+    </div>
+
+    <div class="show-container">
+        <h2 class="section-title">Образование</h2>
+        {% for education in resume.education.all %}
+            <div>
+                <h5>{{ education.educational_institution }} ({{ education.year_of_graduation }})</h5>
+                <p><strong>Уровень образования:</strong> {{ education.get_degree_display }}</p>
+                <p><strong>Форма обучения:</strong> {{ education.get_form_of_education_display }}</p>
+                <p><strong>Специальность:</strong> {{ education.specialty }}</p>
+                <hr>
+            </div>
+        {% empty %}
+            <p>Нет информации об образовании.</p>
+        {% endfor %}
+    </div>
+
+    <div class="show-container">
+        <h2 class="section-title">Портфолио</h2>
+        {% if resume.portfolio.description %}
+            <p>{{ resume.portfolio.description }}</p>
+            {% for photo in resume.portfolio.photos.all %}
+                <div class="r5"></div>
+                <a href="{{ photo.image.url }}"><img src="{{ photo.image.url }}" alt="Фото портфолио" class="img-thumbnail" ></a>
+            {% endfor %}
+        {% else %}
+            <p>Портфолио отсутствует.</p>
+        {% endif %}
+    </div>
+    {% if resume.professional_skills.skills %}
+    <div class="show-container">
+        <h2 class="section-title">Профессиональные навыки</h2>
+        <p>{{ resume.professional_skills.skills }}</p>
+    </div>
+    {% endif %}
+    {% if resume.about.biography %}
+    <div class="show-container">
+        <h2 class="section-title">Дополнительные сведения</h2>
+        <p>{{ resume.about.biography }}</p>
+    </div>
+    {% endif %}
+</div>
+
+{% endblock %}
