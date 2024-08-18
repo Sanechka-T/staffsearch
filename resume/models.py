@@ -126,7 +126,6 @@ class Photos(models.Model):
                               blank=True, null=True)
 
 
-
 class ProfessionalSkills(models.Model):
     resume = models.OneToOneField('Resume', on_delete=models.CASCADE, related_name='professional_skills')
     skills = models.TextField(verbose_name='Навыки', blank=True, null=True)
