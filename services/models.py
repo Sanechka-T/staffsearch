@@ -42,11 +42,19 @@ class Service(models.Model):
     def __str__(self):
         return f"Услуга {self.name} {self.cost}"
 
+    class Meta:
+        verbose_name = "Услугу"
+        verbose_name_plural = "Услуги"
+
 
 class Photos(models.Model):
     service = models.ForeignKey('Service', on_delete=models.CASCADE, related_name='photos')
     image = models.ImageField(upload_to='photo/resume_images/%Y/%m/%d', verbose_name='Фотографии', blank=True,
                               null=True)
+
+    class Meta:
+        verbose_name = "Фотографию"
+        verbose_name_plural = "Фотографии"
 
 
 class Feedback(models.Model):
@@ -60,6 +68,10 @@ class Feedback(models.Model):
     service = models.ForeignKey('Service', on_delete=models.CASCADE, related_name='feedback')
     estimation = models.IntegerField( choices=ESTIMATION_CHOICES, default=5, verbose_name='Оценка')
     feedback_text = models.TextField(verbose_name='Отзыв', blank=False)
+
+    class Meta:
+        verbose_name = "Отзыв"
+        verbose_name_plural = "Отзывы"
 
 
 class Additionally(models.Model):
@@ -88,3 +100,7 @@ class Additionally(models.Model):
                            blank=True)
     tools = models.CharField(max_length=3, choices=CONTRACT_CHOICES, default='no', verbose_name='Инструменты',
                              blank=True)
+
+    class Meta:
+        verbose_name = "Дополнения"
+        verbose_name_plural = "Дополнения"

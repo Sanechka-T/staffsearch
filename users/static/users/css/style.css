@@ -2,7 +2,7 @@
 
 .body_login {
   height: 100vh;
-  min-width: 100vh;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -15,7 +15,6 @@
 
 .header__login {
   margin-left: 0px;
-  display: block;
   width: 25px;
   height: 50px;
   background-repeat: no-repeat;
@@ -309,7 +308,9 @@
 .navigation.active span:nth-child(1) {
   transform: translateY(-30px) translateX(0);
 }
-
+.r5 {
+  padding: 5px;
+}
 .navigation.active span:nth-child(3) {
   transform: translateY(30px) translateX(0);
 }
@@ -324,3 +325,17 @@
   font-size: 1.25em;
 }
 /*end*/
+
+.input-box input, .input-box select, .input-box textarea {
+    width: 100%; /* Полная ширина поля */
+    padding: 10px; /* Внутренний отступ */
+    box-sizing: border-box; /* Учитывать отступы и рамки в общей ширине */
+}
+
+/*классы для регистрации*/
+.body_register {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}

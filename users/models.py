@@ -13,3 +13,7 @@ class Employer(models.Model):
     company_email = models.EmailField(blank=True, null=True, verbose_name='Email компании')
     company_address = models.CharField(max_length=200, blank=True, null=True, verbose_name='Адрес компании')
     company_site = models.URLField(blank=True, null=True, verbose_name='Сайт компании')
+
+    class Meta:
+        verbose_name = "Работодателя"
+        verbose_name_plural = "Работодатели"

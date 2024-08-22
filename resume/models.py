@@ -61,6 +61,11 @@ class Resume(models.Model):
     def __str__(self):
         return f"Резюме {self.post} {self.salary}"
 
+    class Meta:
+        verbose_name = 'Резюме'
+        verbose_name_plural = 'Резюме'
+
+
 class WorkExperience(models.Model):
     EXPERIENCE_CHOICES = (
         ('without-experience', 'Без опыта'),
@@ -86,6 +91,10 @@ class WorkExperience(models.Model):
     experience = models.CharField(max_length=18, choices=EXPERIENCE_CHOICES, verbose_name='Стаж')
     description = models.TextField(verbose_name='Обязанности', default='', blank=True)
     achievements = models.TextField(verbose_name='Достижения', default='', blank=True)
+
+    class Meta:
+        verbose_name = 'Опыт работы'
+        verbose_name_plural = 'Опыт работы'
 
 
 class Education(models.Model):
@@ -114,10 +123,17 @@ class Education(models.Model):
     faculty = models.CharField(max_length=100, default='', blank=True, verbose_name='Факультет')
     specialty = models.CharField(max_length=150, default='', blank=True, verbose_name='Специальность')
 
+    class Meta:
+        verbose_name = 'Образование'
+        verbose_name_plural = 'Образование'
 
 class Portfolio(models.Model):
     resume = models.OneToOneField('Resume', on_delete=models.CASCADE, related_name='portfolio')
     description = models.TextField(blank=True, null=True, verbose_name='Описание')
+
+    class Meta:
+        verbose_name = 'Портфолио'
+        verbose_name_plural = 'Портфолио'
 
 
 class Photos(models.Model):
@@ -125,12 +141,24 @@ class Photos(models.Model):
     image = models.ImageField(upload_to='photo/resume_images/%Y/%m/%d', verbose_name='Фото для портфолио',
                               blank=True, null=True)
 
+    class Meta:
+        verbose_name = 'Фотографию'
+        verbose_name_plural = 'Фотографии'
+
 
 class ProfessionalSkills(models.Model):
     resume = models.OneToOneField('Resume', on_delete=models.CASCADE, related_name='professional_skills')
     skills = models.TextField(verbose_name='Навыки', blank=True, null=True)
 
+    class Meta:
+        verbose_name = 'Навыки'
+        verbose_name_plural = 'Навыки'
+
 
 class About(models.Model):
     resume = models.OneToOneField('Resume', on_delete=models.CASCADE, related_name='about')
     biography = models.TextField(verbose_name='Дополнительные сведения', blank=True, null=True)
+
+    class Meta:
+        verbose_name = 'Дополнительные сведения'
+        verbose_name_plural = 'Дополнительные сведения'

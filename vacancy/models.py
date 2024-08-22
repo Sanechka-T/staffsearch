@@ -18,6 +18,10 @@ class Vacancy(models.Model):
     def __str__(self):
         return f"Вакансия {self.title}"
 
+    class Meta:
+        verbose_name = "Вакансию"
+        verbose_name_plural = "Вакансии"
+
 
 class Conditions(models.Model):
     EMPLOYMENT_CHOICES = (
@@ -49,3 +53,8 @@ class Conditions(models.Model):
     frequency_payments = models.CharField(max_length=11, choices=FREQUENCY_CHOICES, default='once-week',
                                           verbose_name='Частота выплат')
     what_employees_get = models.TextField(blank=True, null=True, verbose_name='Что получают работники')
+
+    class Meta:
+        verbose_name = "Условие"
+        verbose_name_plural = "Условия"
+

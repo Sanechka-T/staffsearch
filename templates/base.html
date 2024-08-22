@@ -28,10 +28,10 @@
         {% include 'includes/index_logo.html'%}
 
 
-        <form action="{% url sort_url %}" class="form col-8" method="get">
+        <form action="{% url sort_url %}" class="form" method="get">
             <button class="form__button" type="submit"><img src="{% static 'img/search.svg' %}"></button>
             <input
-                    class="form__input col-12"
+                    class="form__input"
                     type="search"
                     placeholder="{{sort_placeholder}}"
                     name="q"

@@ -17,3 +17,7 @@ class Ticket(models.Model):
     ticket_file = models.FileField(upload_to='ticket/%Y/%m/%d', default=None, blank=True, null=True,
                                    verbose_name='Дополнительные данные')
     date_uploaded = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания заявки')
+
+    class Meta:
+        verbose_name = 'Заявку'
+        verbose_name_plural = 'Заявки на помощь'

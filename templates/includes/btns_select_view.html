@@ -1,7 +1,7 @@
 <!-- Переключатель -->
  <div class="container">
   <div class="row">
-    <div class="col-11 btn-rad">
+    <div class="btn-rad col-11">
       <input type="radio" class="btn-check" name="options" id="option1" autocomplete="off" {% if type_radio == 'resumes' %} checked {% endif %} onchange="location.href='{% url 'resumes' %}'">
       <label class="btn btn-three" for="option1">Резюме</label>
 

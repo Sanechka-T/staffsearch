@@ -19,6 +19,7 @@ button {
   border: none;
   outline: none;
   background: transparent;
+  margin: 0;
 }
 
 .container {
@@ -43,10 +44,6 @@ button {
   transition: all 0.3s ease;
   left: -600px;
 }
-.menu:hover {
-  transition: all 0.3s ease;
-  left: 0;
-}
 
 .in {
   padding: 25vh 100px;
@@ -58,6 +55,13 @@ button {
   right: -435px;
 }
 
+/*
+.menu:hover {
+  transition: all 0.3s ease;
+  left: 0;
+}
+*/
+
 .in:hover {
   right: 0;
   transition: all 0.3s ease;
@@ -68,7 +72,6 @@ button {
   border-radius: 10px;
   padding: 10px 20px;
 }
-
 
 .title {
   color: white;
@@ -115,6 +118,7 @@ button {
   margin: 25px 0;
 }
 
+/* Общие стили для шапки */
 .header {
   position: fixed;
   top: 0;
@@ -122,7 +126,6 @@ button {
   right: 0;
   width: 100%;
   height: 75px;
-  margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -130,22 +133,14 @@ button {
   z-index: 9999;
   transition: box-shadow 0.3s;
   backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  padding: 20px 10px 20px 10px;
+  padding: 20px;
 }
 
+/* Стили для контейнера шапки */
 .header__c {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
   width: 100%;
-  height: 75px;
-  margin: 0 auto;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  z-index: 9999;
   padding: 20px 10px 20px 10px;
 }
 
@@ -156,47 +151,13 @@ button {
   margin-bottom: 0;
 }
 
-ul.header__list {
-  margin-bottom: 0;
-}
-
-
-.header__link {
-  margin-right: 30px;
-  font-size: 15px;
-  color: #ffffff9e;
-  text-decoration: none;
-}
-
-.header__link:hover {
-  text-decoration: underline;
-  color: #fff;
-}
-
-.header__logo {
-  display: block;
-  width: 300px;
-  height: 120%;
-  background-image: url(../img/logo.svg);
-  background-repeat: no-repeat;
-  margin-right: 23px;
-}
-
-.header__burger {
-  margin-left: 30px;
-  display: block;
-  width: 50px;
-  height: 50px;
-  border: 2px;
-  background-repeat: no-repeat;
-  cursor: pointer;
-}
-
 .header__item {
   display: flex;
   flex-direction: column; /* Располагаем элементы по вертикали */
   align-items: center; /* Центрируем элементы по горизонтали */
+  position: relative;
 }
+
 .header__link_header {
   margin-right: 30px;
   font-size: 15px;
@@ -206,14 +167,121 @@ ul.header__list {
   flex-direction: column; /* Располагаем иконку и текст по вертикали */
   align-items: center; /* Центрируем содержимое */
 }
+
+/* Применяем выделение для ссылок при наведении */
+.header__link_header:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.header__link {
+  margin-right: 30px;
+  font-size: 15px;
+  color: #ffffff9e;
+  text-decoration: none;
+}
+
+/* Медиа-запросы для адаптивности */
+@media (max-width: 768px) {
+  .header__c {
+      flex-direction: column;
+      align-items: flex-start; /* Выравнивание по левому краю */
+  }
+
+  .form {
+      width: 100%; /* Устанавливаем ширину формы на 100% */
+      margin-top: 10px; /* Отступ сверху */
+  }
+
+  .header__list {
+      flex-direction: column; /* Вертикальная ориентация элементов */
+      width: 100%; /* Ширина для списка */
+  }
+
+  .header__item {
+      margin: 5px 0; /* Отступы между элементами */
+  }
+
+  .header__burger {
+      display: block; /* Показываем бургер-меню */
+  }
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Затемнение */
+  display: none; /* Скрыто по умолчанию */
+  z-index: 10; /* Поверх содержимого */
+}
+
 .icon {
+  display: block;
   width: 24px; /* Установите ширину иконки */
   height: 24px; /* Установите высоту иконки */
   background-repeat: no-repeat;
   background-position: center; /* Центрируем изображение фона */
   margin-bottom: 5px; /* Отступ между иконкой и текстом */
 }
+
+/* Скрываем иконки на больших экранах */
+@media (max-width: 768px) {
+  .icon {
+      display: none; /* Скрываем иконки */
+  }
+}
+
+.header__link:hover {
+  text-decoration: underline;
+  color: #fff;
+}
+
+.header__logo {
+  display: block;
+  width: 100%; /* Используем проценты для адаптивности */
+  max-width: 300px; /* Максимальная ширина логотипа */
+  height: auto; /* Высота адаптируется для сохранения пропорций */
+  background-repeat: no-repeat;
+  background-size: contain; /* Обеспечиваем, чтобы изображение нормально отображалось в области */
+  padding: 2%;
+  margin-right: 3vh;
+}
+
+/* Дополнительные медиа-запросы для улучшения адаптивности */
+@media (max-width: 768px) {
+  .header__logo {
+      width: 50%; /* Увеличиваем ширину логотипа на меньших экранах */
+  }
+}
+
+@media (max-width: 480px) {
+  .header__logo {
+      width: 70%; /* Увеличиваем ширину логотипа для самых маленьких экранов */
+  }
+}
+
+.header__burger {
+  margin-left: 30px;
+  display: block;
+  width: 50px;
+  height: 50px;
+  border: 2px;
+  background-image: url(../img/bars-solid.svg);
+  background-repeat: no-repeat;
+}
+
+/* Ячейка со списком навигации */
+.header__nav {
+  display: flex;
+}
+
+/* Стили для формы поиска */
 .form {
+  flex-grow: 1;
+  display: flex;
   position: relative;
 }
 
@@ -221,6 +289,7 @@ ul.header__list {
   display: block;
   width: 20px;
   height: 20px;
+  background-image: url(../img/magnifying-glass-solid.svg);
   background-repeat: no-repeat;
   background-color: transparent;
   border: none;
@@ -229,8 +298,15 @@ ul.header__list {
   left: 10px;
 }
 
+/* Проверяем размеры кнопки для более красивого отображения */
+@media (max-width: 768px) {
+  .form__button {
+      width: auto; /* Убираем фиксированную ширину для мобильных устройств */
+  }
+}
+
 .form__input {
-  width: 966px;
+  width: 100%;
   background: rgba(255, 255, 255, 0.426);
   border-radius: 10px;
   border: none;
@@ -373,8 +449,9 @@ ul.header__list {
   border-radius: 30px;
   transition: .5s;
 }
+
 .cont{
- margin-right: 50px;
+ margin-right: 2vh;
 }
 
 .center-container {
@@ -391,8 +468,11 @@ ul.header__list {
 .btn-three {
   background-color: rgba(197, 197, 197, 1) !important;
   color: black !important; /* Черный цвет текста */
-  width: 391px;
+  width: 33%;
+  min-width: 100px
   font-size: 20px !important;
+  transition: width 0.3s, font-size 0.3s;
+  margin-bottom: 1%;
 }
 
 .btn-three:hover {
@@ -400,6 +480,22 @@ ul.header__list {
   color: black !important; /* Черный цвет текста */
   font-size: 25px !important;
   transition: all 0.3s ease;
+}
+
+/* Для экранов меньше 768px */
+@media (max-width: 768px) {
+  .btn-three {
+    width: 80vw; /* Ширина 80% от ширины окна */
+    font-size: 18px; /* Уменьшаем размер шрифта */
+  }
+}
+
+/* Для экранов меньше 480px */
+@media (max-width: 480px) {
+  .btn-three {
+    width: 90vw; /* Ширина 90% от ширины окна */
+    font-size: 16px; /* Ещё меньше размер шрифта */
+  }
 }
 
 .btn-check:checked+.btn {
