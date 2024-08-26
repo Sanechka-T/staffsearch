@@ -22,13 +22,13 @@ from django.views.generic import RedirectView
 from . import settings
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', RedirectView.as_view(url='resumes', permanent=True), name='index'),
-    path('', include('resume.urls')),
-    path('', include('services.urls')),
-    path('', include('vacancy.urls')),
-    path('users/', include('users.urls', namespace='users')),
-    path('info/', include('info.urls', namespace='info')),
-    path('help/', include('help.urls', namespace='help')),
-    path('__debug__/', include("debug_toolbar.urls")),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path('admin/', admin.site.urls),  # URL для административного интерфейса
+    path('', RedirectView.as_view(url='resumes', permanent=True), name='index'),  # Редирект на 'resumes'
+    path('', include('resume.urls')),  # Включение URL-ов приложения 'resume'
+    path('', include('services.urls')),  # Включение URL-ов приложения 'services'
+    path('', include('vacancy.urls')),  # Включение URL-ов приложения 'vacancy'
+    path('users/', include('users.urls', namespace='users')),  # Включение URL-ов приложения 'users' с пространством имен
+    path('info/', include('info.urls', namespace='info')),  # Включение URL-ов приложения 'info' с пространством имен
+    path('help/', include('help.urls', namespace='help')),  # Включение URL-ов приложения 'help' с пространством имен
+    path('__debug__/', include("debug_toolbar.urls")),  # URL для панели отладки
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  # Настройка URL для медиафайлов

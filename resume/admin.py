@@ -8,11 +8,21 @@ from .models import Resume, WorkExperience, Education, Portfolio, Photos, Profes
 
 @admin.register(Resume)
 class ResumeAdmin(admin.ModelAdmin):
+    # Настройка административного интерфейса для модели Resume
+
     list_display = (
-    'user', 'name', 'lastname', 'date_birth', 'city', 'removal', 'remote_work', 'phone', 'email', 'post', 'salary',
-    'employment', 'photo', 'resume_file', 'date_uploaded', 'date_update')
-    search_fields = ('name', 'lastname', 'city', 'email', 'post', 'salary')
-    list_per_page = 5
+        'user', 'name', 'lastname', 'date_birth', 'city', 'removal',
+        'remote_work', 'phone', 'email', 'post', 'salary',
+        'employment', 'photo', 'resume_file', 'date_uploaded', 'date_update'
+    )
+    # Поля, которые будут отображаться в списке объектов модели Resume
+
+    search_fields = (
+        'name', 'lastname', 'city', 'email', 'post', 'salary'
+    )
+    # Поля, по которым можно искать объекты модели Resume в административном интерфейсе
+
+    list_per_page = 5  # Количество объектов, отображаемых на одной странице
 
 
 @admin.register(WorkExperience)

@@ -10,7 +10,7 @@ from datetime import date
 
 
 class Resume(models.Model):
-    EMPLOYMENT_CHOICES = (
+    EMPLOYMENT_CHOICES = (  # Выбор типов занятости
         ('full-time', 'Полная'),
         ('part-time', 'Частичная'),
         ('shift work', 'Вахтовая'),
@@ -35,7 +35,7 @@ class Resume(models.Model):
     date_uploaded = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания резюме')
     date_update = models.DateTimeField(auto_now=True, verbose_name='Дата обновления резюме')
 
-    def clean_salary(self):
+    def clean_salary(self):  # Проверка, что значение salary содержит только цифры
         salary = self.cleaned_data.get('salary')
 
         # Проверка, что значение salary содержит только цифры
@@ -45,10 +45,10 @@ class Resume(models.Model):
 
         return salary
 
-    def get_age(self):
+    def get_age(self):  # Вычисление возраста на основе даты рождения
         return (date.today() - self.date_birth).days // 365
 
-    def get_true_age(self):
+    def get_true_age(self):  # Форматирование возраста с учетом грамматических правил
         age = self.get_age()
         suffix = "лет"
         if (age // 10) % 10 != 1:
@@ -58,12 +58,12 @@ class Resume(models.Model):
                 suffix = "года"
         return f"{age} {suffix}"
 
-    def __str__(self):
+    def __str__(self):  # Формат вывода объектов резюме
         return f"Резюме {self.post} {self.salary}"
 
     class Meta:
-        verbose_name = 'Резюме'
-        verbose_name_plural = 'Резюме'
+        verbose_name = 'Резюме'  # Имя для единственного числа
+        verbose_name_plural = 'Резюме'  # Имя для множественного числа
 
 
 class WorkExperience(models.Model):

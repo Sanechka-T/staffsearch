@@ -4,11 +4,10 @@ from staffsearch import settings
 from .models import WorkExperience, Resume, Education
 
 
-class DataMixin:
-    # paginate_by = 10
+class DataMixin:  # Класс-миксин для предоставления общих данных контекста для представлений.
     template_name = 'resume/listResumes.html'
     title_page = 'Поиск сотрудников и услуг, база резюме StaffSearch'
-    extra_context = {
+    extra_context = {  # Дополнительные контекстные данные для шаблона
         'sort_url': 'searchResumes',
         'sort_placeholder': 'Должность или навыки',
         'Experience': WorkExperience.EXPERIENCE_CHOICES,
@@ -19,16 +18,15 @@ class DataMixin:
     }
     context_object_name = 'resumes'
 
-
-    def __init__(self):
+    def __init__(self):  # Инициализация класса, установка заголовка страницы в extra_context.
         if self.title_page is not None:
             self.extra_context['title'] = self.title_page
 
 
-class ToolsMixin:
+class ToolsMixin:  # Миксин для добавления инструментов к представлениям.
 
     def get(self, request, *args, **kwargs):
-        queryset = self.get_queryset()
-        if queryset is None:
+        queryset = self.get_queryset()  # Получение набора запросов.
+        if queryset is None:  # Если результаты не найдены, перенаправление на страницу резюме.
             return redirect('resumes')
-        return super().get(request, *args, **kwargs)
+        return super().get(request, *args, **kwargs)  # Вызов родительского метода.

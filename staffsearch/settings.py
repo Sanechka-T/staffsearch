@@ -87,12 +87,12 @@ WSGI_APPLICATION = 'staffsearch.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'staff_search_db',
-        'USER': 'root',
-        'PASSWORD': '12345',
-        'HOST': '127.0.0.1',
-        'PORT': '3306',
+        'ENGINE': 'django.db.backends.mysql',  # Движок базы данных MySQL
+        'NAME': 'staff_search_db',  # Имя базы данных
+        'USER': 'root',  # Имя пользователя БД
+        'PASSWORD': '12345',  # Пароль пользователя БД
+        'HOST': '127.0.0.1',  # Адрес сервера базы данных (локальный)
+        'PORT': '3306',  # Порт, используемый для подключения к MySQL
     }
 }
 
@@ -131,32 +131,31 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = '/static/'  # URL для доступа к статическим файлам
 
-STATIC_ROOT = BASE_DIR / "staticfiles"
+STATIC_ROOT = BASE_DIR / "staticfiles"  # Путь к директории, где будут собраны статические файлы
 
 STATICFILES_DIRS = [
-    BASE_DIR / "static",  # Добавьте путь к общим статическим файлам
+    BASE_DIR / "static",  # Путь к общим статическим файлам
 ]
 
-MEDIA_ROOT = BASE_DIR / 'media'
-MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'  # Директория для загрузки пользовательских медиафайлов
+MEDIA_URL = '/media/'  # URL для доступа к медиафайлам
 
-# Default primary key field type
+# Тип поля первичного ключа по умолчанию
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'  # Использование BigAutoField для первичных ключей
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-DEFAULT_USER_IMAGE = STATIC_URL + 'img/default.png'
-DEFAULT_IMAGE = STATIC_URL + 'img/default_img.png'
+DEFAULT_USER_IMAGE = STATIC_URL + 'img/default.png'  # Путь к изображению пользователя по умолчанию
+DEFAULT_IMAGE = STATIC_URL + 'img/default_img.png'  # Путь к изображению по умолчанию
 
 AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',
-    'users.authentication.EmailAuthBackend',
+    'django.contrib.auth.backends.ModelBackend',  # Стандартный бэкенд аутентификации Django
+    'users.authentication.EmailAuthBackend',  # Пользовательский бэкенд аутентификации по email
 ]
 
-LOGIN_REDIRECT_URL = 'index' # перенаправление после успешной авторизации
+LOGIN_REDIRECT_URL = 'index'  # URL для перенаправления после успешной авторизации
 
-LOGOUT_REDIRECT_URL = 'index' # перенаправление после logout
+LOGOUT_REDIRECT_URL = 'index'  # URL для перенаправления после выхода из аккаунта
 
-LOGIN_URL = 'users:login' # перенаправление если нужно авторизоваться
+LOGIN_URL = 'users:login'  # URL для перенаправления пользователя на страницу авторизации, если требуется вход
